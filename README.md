@@ -9,4 +9,4 @@ Destinado a máquinas novas — instala dependências, habilita o serviço do Do
 ## 🚀 Uso rápido (última versão do branch `main`)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/<sua-org>/docker_bootstrap_ubuntu/main/bootstrap-ubuntu-docker.sh | bash
+curl -fsSL https://raw.githubusercontent.com/MarcosCunhaLima/docker_bootstrap_ubuntu/main/bootstrap-ubuntu-docker.sh | bash
