@@ -41,7 +41,8 @@ if dpkg -s nodejs >/dev/null 2>&1; then
   run "sudo apt-get remove -y nodejs || true"
 fi
 run "curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -"
-run "sudo apt-get install -y nodejs"
+# run "sudo apt-get install -y nodejs"
+run "sudo apt-get install -y jq" # necessario para instalacao automatica depois
 run "node -v && npm -v"
 
 # 4) Repositório oficial do Docker
