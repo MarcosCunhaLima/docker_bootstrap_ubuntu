@@ -41,17 +41,18 @@ if dpkg -s nodejs >/dev/null 2>&1; then
   run "sudo apt-get remove -y nodejs || true"
 fi
 run "curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -"
-# run "sudo apt-get install -y nodejs"
+run "sudo apt-get install -y nodejs"
 run "sudo apt-get install -y jq" # necessario para instalacao automatica depois
 run "node -v && npm -v"
 
 # 4) Repositório oficial do Docker
 run "sudo install -m 0755 -d /etc/apt/keyrings"
-if [ ! -f /etc/apt/keyrings/docker.gpg ]; then
-  run "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg"
-else
-  log "docker.gpg já existe, seguindo."
-fi
+#if [ ! -f /etc/apt/keyrings/docker.gpg ]; then
+run "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg"
+#else
+#  log "docker.gpg já existe, seguindo."
+#fi
+run "sudo chmod a+r /etc/apt/keyrings/docker.gpg"
 run "echo \
 'deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
 https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable' \
@@ -64,7 +65,7 @@ run 'sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx
 
 # 6) Habilitar e iniciar serviço do Docker (se systemd disponível)
 if command -v systemctl >/dev/null 2>&1; then
-  run "sudo systemctl enable docker"
+  run "sudo systemctl enable --now docker"
   run "sudo systemctl start docker"
 else
   warn "systemctl não encontrado; tentando iniciar via 'service docker start'"
