@@ -81,7 +81,7 @@ else
   #warn "Saia e entre novamente na sessão (ou 'newgrp docker') para aplicar o grupo 'docker'."
 fi
 
-8) Smoke tests
+#8) Smoke tests
 if command -v docker >/dev/null 2>&1; then
   run "docker version || true"
   run "docker info | head -n 20 || true"
