@@ -81,12 +81,12 @@ else
   #warn "Saia e entre novamente na sessão (ou 'newgrp docker') para aplicar o grupo 'docker'."
 fi
 
-# 8) Smoke tests
-# if command -v docker >/dev/null 2>&1; then
-#   run "docker version || true"
-#   run "docker info | head -n 20 || true"
-# else
-#   warn "'docker' não está no PATH desta sessão. Após relogar, execute: 'docker version'."
-# fi
+8) Smoke tests
+if command -v docker >/dev/null 2>&1; then
+  run "docker version || true"
+  run "docker info | head -n 20 || true"
+else
+  warn "'docker' não está no PATH desta sessão. Após relogar, execute: 'docker version'."
+fi
 
-log "Bootstrap finalizado com sucesso. Logs: $LOGFILE"
+# log "Bootstrap finalizado com sucesso. Logs: $LOGFILE"
