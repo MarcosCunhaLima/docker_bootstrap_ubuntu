@@ -48,7 +48,7 @@ run "node -v && npm -v"
 # 4) Repositório oficial do Docker
 run "sudo install -m 0755 -d /etc/apt/keyrings"
 #if [ ! -f /etc/apt/keyrings/docker.gpg ]; then
-run "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg"
+run "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg"
 #else
 #  log "docker.gpg já existe, seguindo."
 #fi
