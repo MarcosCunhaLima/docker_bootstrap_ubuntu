@@ -82,11 +82,11 @@ else
 fi
 
 # 8) Smoke tests
-if command -v docker >/dev/null 2>&1; then
-  run "docker version || true"
-  run "docker info | head -n 20 || true"
-else
-  warn "'docker' não está no PATH desta sessão. Após relogar, execute: 'docker version'."
-fi
+# if command -v docker >/dev/null 2>&1; then
+#   run "docker version || true"
+#   run "docker info | head -n 20 || true"
+# else
+#   warn "'docker' não está no PATH desta sessão. Após relogar, execute: 'docker version'."
+# fi
 
 log "Bootstrap finalizado com sucesso. Logs: $LOGFILE"
