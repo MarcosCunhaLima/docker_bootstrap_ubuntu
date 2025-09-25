@@ -73,15 +73,15 @@ else
 fi
 
 # 7) Permitir uso do docker sem sudo
-if groups "$USER" | grep -q '\bdocker\b'; then
-  log "Usuário '$USER' já está no grupo docker."
+TARGET_USER="${SUDO_USER:-$USER}"
+if id -nG "$TARGET_USER" | grep -qw docker; then
+  log "Usuário '$TARGET_USER' já está no grupo docker."
 else
-  run "sudo usermod -aG docker $USER"
-  run "newgrp docker"
-  #warn "Saia e entre novamente na sessão (ou 'newgrp docker') para aplicar o grupo 'docker'."
+  run "sudo usermod -aG docker '$TARGET_USER'"
+  warn "Usuário '$TARGET_USER' foi adicionado ao grupo 'docker'."
 fi
 
-#8) Smoke tests
+# 8) Smoke tests (apenas para verificar o daemon)
 if command -v docker >/dev/null 2>&1; then
   run "docker version || true"
   run "docker info | head -n 20 || true"
@@ -89,4 +89,10 @@ else
   warn "'docker' não está no PATH desta sessão. Após relogar, execute: 'docker version'."
 fi
 
-# log "Bootstrap finalizado com sucesso. Logs: $LOGFILE"
+# 9) Banner final
+echo -e "\n============================================================"
+echo -e "🚀 Instalação concluída!"
+echo -e "👉 Para usar 'docker' sem sudo, finalize a sessão atual e entre novamente,"
+echo -e "   ou simplesmente abra um NOVO terminal."
+echo -e "Usuário afetado: $TARGET_USER"
+echo -e "============================================================\n"
